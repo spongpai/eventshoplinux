@@ -1,0 +1,146 @@
+package com.eventshop.eventshoplinux.domain.datasource.emage;
+
+import java.awt.Point;
+import java.util.ArrayList;
+
+import com.eventshop.eventshoplinux.domain.common.FrameParameters;
+import com.eventshop.eventshoplinux.util.commonUtil.CommonUtil;
+
+//This class is used for resolution mapping from the datasource to emage
+//This is different from ResolutionMapper.java which used to map the resolution between emage
+public class ResolutionWrapper {
+	
+	public enum SpatialWrapper {
+		sum, max, min, average, majority, linear_interpolation, repeat, split_uniform, nearest
+	}
+	public enum TemporalWrapper {
+		sum, max, min, average, latest, repeat, split_uniform
+	}	
+	public enum DatasourceType {
+		point, region, grid, path, overlapRegion, overlapGrid, nonUniformGrid
+	}
+	
+	
+	
+	private DatasourceType dsType;
+	//Emage emage;
+	private FrameParameters emageResolution;
+	private SpatialWrapper SW;
+	private double[][] datagrid;
+	private int numRow, numCol;
+	
+	// For point datasource
+	private ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>(); 
+	
+	
+	
+	public ResolutionWrapper(DatasourceType ds, FrameParameters fp, SpatialWrapper sw){
+		this.dsType = ds;
+		this.emageResolution = fp;
+		this.SW = sw;
+		this.numRow = fp.numOfRows;
+		this.numCol = fp.numOfColumns;
+		this.datagrid = createEmptyDataGrid(numRow, numCol);
+		
+	}
+	public void setDataPoints(ArrayList<DataPoint> ds){
+		dataPoints = ds;
+	}
+	public ArrayList<DataPoint> getDataPoints(){
+		return dataPoints;
+	}
+	public double[][] getDatagrid(){
+		return datagrid;
+	}
+	public FrameParameters getEmageResolution() {
+		return emageResolution;
+	}
+	public void setEmageResolution(FrameParameters emageResolution) {
+		this.emageResolution = emageResolution;
+	}
+	
+	public double[][] setDataGrid2Zero(){
+		for(int i = 0; i < datagrid.length; i++){
+			for(int j = 0; j < datagrid[0].length; j++)
+				datagrid[i][j] = 0.0;
+		}
+		return datagrid;
+	}
+	public double[][] createEmptyDataGrid(int row, int col){
+		double[][] grid = new double[row][col];
+		for(int i = 0; i < row; i++){
+			for(int j = 0; j < col; j++)
+				grid[i][j] = 0.0;
+		}
+		return grid;
+	}
+	public void reset(){
+		
+	}
+	public double[][] doTransformation() 	{
+		switch(dsType){
+			case point: {
+				datagrid = setDataGrid2Zero();
+				CommonUtil.printNonZeroCell(datagrid);
+				if(dataPoints != null){
+					switch (SW){
+					case sum:{
+						//System.out.println("---" + datagrid.length + ", " + datagrid[0].length);
+						for(DataPoint p: dataPoints){
+							datagrid[p.xEmageIndex][p.yEmageIndex] += p.value;
+						}
+						break;
+					}
+					case average:{
+						double[][] count = this.createEmptyDataGrid(numRow, numCol);
+						for(DataPoint p: dataPoints){
+							datagrid[p.xEmageIndex][p.yEmageIndex] += p.value;
+							count[p.xEmageIndex][p.yEmageIndex] += 1.0;
+						}
+						for(int i = 0; i < numRow; i++){
+							for(int j = 0; j < numCol; j++){
+								datagrid[i][j] = datagrid[i][j] / count[i][j];
+							}
+						}
+						break;
+					}
+					case nearest:{
+						for(int i = 0; i < numRow; i++){
+							for(int j = 0; j < numCol; j++){
+								datagrid[i][j]= 255/(Math.pow(2,0.1* nearestLoc(i,j)));
+							}
+						}
+						break;
+					}
+					default:{
+						System.out.println("invalid spatial wrapper");
+					}
+					}
+				} else {
+					System.out.println("There is no data points");
+				}
+				break;
+			}
+			case region: {
+				
+				break;
+			}
+			default:{
+				System.out.println("invalid datasource type");
+			}
+		}
+		
+		return datagrid;
+	}
+	
+	private double nearestLoc(int i, int j){
+		Point inPoint =new Point(i,j);
+		double minDist=9999999;
+		for (int s=0; s< dataPoints.size(); s++)
+		{
+			if (inPoint.distance(dataPoints.get(s).point)<minDist)
+				minDist=inPoint.distance(dataPoints.get(s).point);
+		}
+		return minDist;
+	}
+}

@@ -1,0 +1,50 @@
+#context=D://softdump//apache-tomcat-6.0.35//apache-tomcat-6.0.35//webapps//eventshoplinux//
+#context=D://eventshoplinux//src//main//webapp//Temp//
+context=D://BOPT//BOPT//NextGenUI//EventShop//EventShop//releases//releaseNov
+#tempDir=D://eventshoplinux//src//main//webapp//Temp//
+tempDir=D://Temp//
+#dbUrl=jdbc:mysql://localhost:3306/dbeventshop
+#dbUrl=jdbc:mysql://192.168.4.79:3306/dbeventshop
+dbUrl=jdbc:mysql://vmubu12ux.india.hcleai.com:3306/dbeventshop
+schema=dbeventshop
+usr=eventshop
+pwd=eventshop
+<<<<<<< .mine
+## added newly by sanjukta
+datasrcDir=datasources
+queryDir=queries
+env=windows
+## /added newly by sanjukta
+=======
+env=windows
+>>>>>>> .r2429
+
+#Emage properties
+
+imgURL=http://www.ics.uci.edu/~singhv/img/vivek.jpg
+sandyTheme=sheltersSandy
+twtrURL=http://www.twitter.com
+hurricaneTheme=hurCone
+hurricaneURL=http://mw1.google.com/mw-weather/maps_hurricanes/five_day_cone.kml
+shelterURL=http://www.ics.uci.edu/~singhv/twitter/NSS_OPEN_SHELTERS.kml
+shelterSandyURL=https://www.google.com/fusiontables/exporttable?query=select+col0,col1,col11+from+1Ny1ShO0ZH2T0gKMWRuUEYEkKvZ66YOh7UdyNQMQ&amp;o=kmllink&amp;g=col0
+
+#DB properties
+driverName=com.mysql.jdbc.Driver
+DBURL=jdbc:mysql://localhost:3306/twitter
+DBusr=root
+DBpwd=root
+
+#WS properties
+WSuri=http://es-server5.ics.uci.edu:8080/eventshop
+
+flkrURL=http://www.flickr.com
+
+simURL=http://www.simulatedData.com
+esuri=http://es-server5.ics.uci.edu:8080/eventshop
+
+#Twitter Authen
+twtConsumerKey=jYjBN7eXBhU0EurloMYGFQ
+twtConsumerSecret=lBekOCCDULTkr7JBLPBlvAV9MV4wVkYoKYcEoBimaWY
+twtAccessToken=159216395-cJVwHRC2nQdikscMo1Kg6ag1t0vcpmAT3epNZqrB
+twtAccessTokenSecret=baXaT7OlavzZwkG6U3WFLMB2OUnUnWq9xRcxXYg1vs

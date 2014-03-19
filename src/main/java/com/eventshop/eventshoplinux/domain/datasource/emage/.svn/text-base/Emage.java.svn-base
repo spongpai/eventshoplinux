@@ -1,0 +1,97 @@
+package com.eventshop.eventshoplinux.domain.datasource.emage;
+import java.util.Date;
+
+import com.eventshop.eventshoplinux.domain.common.FrameParameters;
+
+
+
+
+public class Emage {
+	public String theme;
+	
+	public Date startTime; 
+	public Date endTime;
+	
+	public double latUnit;		// Resolution of latitude
+	public double longUnit;	// Resolution of longitude
+	
+	public double swLat;
+	public double swLong;
+	public double neLat;
+	public double neLong;
+	
+	public int numOfColumns = 0;
+	public int numOfRows = 0;
+	
+	public double[][] image;
+	public String emageID;
+	
+	
+	public Emage(FrameParameters params, String theme)
+	{
+		this.theme = theme;
+		
+		latUnit = params.latUnit;
+		longUnit = params.longUnit;
+		
+		swLat = params.swLat;
+		swLong = params.swLong;
+		neLat = params.neLat;
+		neLong = params.neLong;
+		
+		numOfColumns = params.getNumOfColumns();
+		numOfRows = params.getNumOfRows();
+		
+		image = new double[numOfRows][numOfColumns];
+		for(int i = 0; i < numOfRows; i++)
+		{
+			for(int j = 0; j < numOfColumns; j++)
+				image[i][j] = 0;
+		}
+	}
+	
+	public FrameParameters getParameters()
+	{
+		FrameParameters params=new FrameParameters();
+		params.end=0;//ToDo
+		params.latUnit=this.latUnit;
+		params.longUnit=this.longUnit;
+		params.neLat=this.neLat;
+		params.neLong=this.neLong;
+		params.numOfColumns=this.numOfColumns;
+		params.numOfRows=this.numOfRows;
+		params.start=0;//ToDo
+		params.swLat=this.swLat;
+		params.swLong=this.swLong;
+		params.syncAtMilSec=0;
+		params.timeWindow=0;
+		
+		return params;
+		
+	}
+
+	public void setTheme(String theme)
+	{
+		this.theme = theme;
+	}
+	
+	public void setStart(long start)
+	{
+		this.startTime = new Date(start);
+	}
+	
+	public void setEnd(long end)
+	{
+		this.endTime = new Date(end);
+	}
+	
+	
+	public int setValue(int col, int row, double value)
+	{
+		if(col >= numOfColumns || row >= numOfRows)
+			return -1;
+		
+		image[row][col] = value;
+		return 0;
+	}
+}

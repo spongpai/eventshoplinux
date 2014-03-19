@@ -1,0 +1,21 @@
+package com.eventshop.eventshoplinux.domain.datasource.emage;
+import java.awt.Point;
+
+public class SpatialBound {
+	Point sw; 
+	Point ne;
+	public Point getSw() {
+		return sw;
+	}
+	public void setSw(Point sw) {
+		this.sw = sw;
+	}
+	public Point getNe() {
+		return ne;
+	}
+	public void setNe(Point ne) {
+		this.ne = ne;
+	}
+	
+	
+}

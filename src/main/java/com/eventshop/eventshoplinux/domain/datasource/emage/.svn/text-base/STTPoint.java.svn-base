@@ -1,0 +1,32 @@
+package com.eventshop.eventshoplinux.domain.datasource.emage;
+import java.util.Date;
+
+
+public class STTPoint {
+	public String theme;		// Theme of this STTPoint
+	
+	public double value;		// Value carried by this point
+	
+	public Date start;			// Start time
+	public Date end;			// End time
+	
+	public double latUnit;		// Resolution of latitude
+	public double longUnit;	// Resolution of longitude
+	public double latitude;	// Latitude
+	public double longitude;	// Longitude
+	
+	public STTPoint(double value, Date start, Date end, double latUnit,
+			double longUnit, double latitude, double longitude, String theme) {
+		this.value = value;
+		
+		this.start = start;
+		this.end = end;
+		
+		this.latUnit = latUnit;
+		this.longUnit = longUnit;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		
+		this.theme = theme;
+	}
+}
