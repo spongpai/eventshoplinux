@@ -174,9 +174,15 @@ public class RegisterServlet extends HttpServlet
 		response.setContentType("application/json");	
 		try {
 			log.info("in servlet");
-			
+			if(request.getParameter("type") == null){
+				log.info("invalid action each request require `type` parameter");
+				new ResponseJSON(response, ResponseJSON.ResponseStatus.ERROR, "invalid parameters, each request required `type` parameter");
+				return;
+			}
+				
 			// start data source
-			if(request.getParameter("type").equals("startds")){
+			if(request.getParameter("type").equals("d") || request.getParameter("type").equals("startds")){
+				// e.g. type=d&dsID=3 or type=startds&dsID=3
 				String dsId = request.getParameter("dsID");
 				log.info("startds: " + dsId);
 				if(dsId == null || dsId.isEmpty()){

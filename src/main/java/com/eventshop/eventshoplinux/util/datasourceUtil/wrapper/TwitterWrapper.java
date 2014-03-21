@@ -222,8 +222,8 @@ public class TwitterWrapper extends Wrapper
 				if(e.getMessage().contains("500"))
 					return 0;
 				if(e.getMessage().contains("420") || e.getMessage().contains("429") || e.getMessage().contains("limit")) {
-					Thread.sleep(1000*60*15);
 					log.info("thread sleep for 15 minutes");
+					Thread.sleep(1000*60*15);
 				}
 			} catch (InterruptedException e2) {
 				log.error(e2.getMessage());

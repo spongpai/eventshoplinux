@@ -154,7 +154,7 @@ public class DataSourceManagementDAO extends BaseDAO {
 				}				
 				
 				psWrpr.setInt(8, Integer.parseInt(ds.getWrapper().getWrprVisualIgnore())); //visual_ignore
-				psWrpr.setString(9, ds.wrapper.getWrprCSVFileURL());
+				//psWrpr.setString(9, ds.wrapper.getWrprCSVFileURL());
 				
 			}	else {
 				
@@ -162,10 +162,11 @@ public class DataSourceManagementDAO extends BaseDAO {
 				psWrpr.setString(6, null);
 				psWrpr.setString(7, null);
 				psWrpr.setInt(8, 0);
-				psWrpr.setString(9,null);
+				//psWrpr.setString(9,null);
 			}
 
-			psWrpr.setInt(10,Integer.parseInt(ds.getSrcID()));		
+			//psWrpr.setInt(10,Integer.parseInt(ds.getSrcID()));		
+			psWrpr.setInt(9,Integer.parseInt(ds.getSrcID()));		
 			
 			psWrpr.executeUpdate();	
 
@@ -426,11 +427,11 @@ public List<DataSourceListElement> getDataSourceList(User user){
 				if(exists){
 					source.setStatus(STATUS_AVAILABLE);
 					source.setControl(1);
-					log.info(STATUS_AVAILABLE + ", file path" +  filepath);
+					log.info(STATUS_AVAILABLE + ", file path " +  filepath);
 				}else{
 					source.setStatus(STATUS_NOT_AVAILABLE);
 				    source.setControl(0);
-				    log.info(STATUS_AVAILABLE + ", file path" +  filepath);
+				    log.info(STATUS_NOT_AVAILABLE + ", file path " +  filepath);
 				}
 				source.setSrcID(srcId);	
 		    	source.setSrcName(srcTitle);	

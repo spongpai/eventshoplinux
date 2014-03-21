@@ -59,9 +59,9 @@ public class Constant {
 	public static final String SELECT_LST_INSID = "SELECT LAST_INSERT_ID()";
 	public static final String UPDATE_DSMSTR_QRY = "UPDATE Datasource_Master SET dsmaster_title=?, dsmaster_theme=?, dsmaster_url=?, " +
 													"dsmaster_format=?, dsmaster_updated_date=now() WHERE dsmaster_id=?";
-	public static final String INSRT_WRPR_QRY = "INSERT INTO Wrapper(wrapper_name,wrapper_type,wrapper_key_value,bag_of_words,visual_tran_mat,visual_color_mat,visual_mask_mat,visual_ignore_since,csv_file_url,wrapper_id) values(?,?,?,?,?,?,?,?,?,?)";
+	public static final String INSRT_WRPR_QRY = "INSERT INTO Wrapper(wrapper_name,wrapper_type,wrapper_key_value,bag_of_words,visual_tran_mat,visual_color_mat,visual_mask_mat,visual_ignore_since,wrapper_id) values(?,?,?,?,?,?,?,?,?)";
 	public static final String UPDATE_WRPR_QRY = "UPDATE Wrapper SET wrapper_name=?, wrapper_type=?, wrapper_key_value=?, bag_of_words=?, visual_tran_mat=?, visual_color_mat=?, visual_mask_mat=?, " +
-												"visual_ignore_since=?, csv_file_url=? where wrapper_id=? ";
+												"visual_ignore_since=? where wrapper_id=? ";
 
 	public static final String INSERT_DSRES_QRY = "INSERT INTO Datasource_Resolution(dsmaster_id,datastream_name,time_window,latitude_unit," +
 													"longitude_unit,boundingbox, resolution_type) values(?,?,?,?,?,?,?)";

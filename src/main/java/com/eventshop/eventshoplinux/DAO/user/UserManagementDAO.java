@@ -2,14 +2,17 @@ package com.eventshop.eventshoplinux.DAO.user;
 
 
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
 import com.eventshop.eventshoplinux.DAO.BaseDAO;
 import com.eventshop.eventshoplinux.domain.login.RegisterUser;
 import com.eventshop.eventshoplinux.domain.login.User;
+
 import static com.eventshop.eventshoplinux.constant.Constant.*;
 
 public class UserManagementDAO extends BaseDAO  {
@@ -38,7 +41,7 @@ public class UserManagementDAO extends BaseDAO  {
 	}
 	
 	
-	public String saveUser(User user ){
+	public String saveUser(User user ) {
 		
 		Connection connection = connection();
 	    PreparedStatement ps = null;
@@ -53,12 +56,12 @@ public class UserManagementDAO extends BaseDAO  {
 	    	 ps.setString(5, user.getGender());
 	    	 ps.setString(6, userKey);
 	    	 ps.setString(7, Integer.toString(user.getRoleId())); // got to check this
-	    	 
+	    	 System.out.println(ps.toString());
 	    	 ps.executeUpdate();
 	    	 return SUCCESS;
 	    	
 	    }catch(Exception e){
-	    	return FAILURE;
+	    	return FAILURE + ":" + e.getMessage();
 	    }
 		
 	}
